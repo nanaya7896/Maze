@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\EyeCheck.cs" />
+     <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\CameraController.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\FaceUpdate.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\IdleChanger.cs" />
