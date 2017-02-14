@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 36ab6d79f19164000b466bc6bfa7101f
+timeCreated: 1486992225
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: G.I.Jackie
+  fontNames:
+  - G.I.Jackie
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
