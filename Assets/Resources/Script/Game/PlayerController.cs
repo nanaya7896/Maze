@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour {
 	float runSpeed=2f;
 	[SerializeField,Header("プレイヤーの速度")]
 	Vector3 velocity;
+	[SerializeField,Header("カメラの回転速度")]
+	float cameraRotateSpeed = 1f;
+
 	[SerializeField]
 	Transform MainCamera;
 
@@ -72,7 +75,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Update () {
 		PlayerRotate ();
-
+		HitAction (hitTag);
 
 		//CameraUpdate ();
 		//stateのアップデートをよぶ
@@ -115,7 +118,7 @@ public class PlayerController : MonoBehaviour {
 	void PlayerRotate()
 	{
 		
-		transform.Rotate (0f, Input.GetAxis("RightAndLeft"), 0f);
+		transform.Rotate (0f, Input.GetAxis("RightAndLeft")*cameraRotateSpeed *Time.deltaTime, 0f);
 
 	}
 
@@ -174,6 +177,8 @@ public class PlayerController : MonoBehaviour {
 				return;
 			}
 		}
+
+
 	}
 
 	void IdelEnd()
@@ -199,7 +204,7 @@ public class PlayerController : MonoBehaviour {
 			hitTag = hit.collider.tag;
 
 		}
-		if (Input.GetKeyDown (KeyCode.K)) {
+		if (Input.GetKeyDown (KeyCode.Return)) {
 			if (WrapAction (hitTag)) {
 				ps = PlayerState.IDEL;
 
@@ -282,6 +287,21 @@ public class PlayerController : MonoBehaviour {
 
 		return false;
 	}
+
+
+	public void HitAction(string gameObjectTag)
+	{
+		switch (gameObjectTag) {
+		case "switch":
+			{
+				if (Input.GetKeyDown (KeyCode.Return)) {
+					WallAction.isKeyCheck = true;
+				}
+			}
+			break;
+		}
+	}
+
 
 
 }
