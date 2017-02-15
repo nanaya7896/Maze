@@ -64,7 +64,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update () {
-		CameraUpdate ();
+		PlayerRotate ();
+		//CameraUpdate ();
 		//stateのアップデートをよぶ
 		state.Update ();
 
@@ -168,7 +169,7 @@ public class PlayerController : MonoBehaviour {
 		prevPos = transform.position;
 
 		PlayerMove ();
-		PlayerRotate ();
+
 		if (prevPos == transform.position) {
 			ps = PlayerState.IDEL;
 		}

@@ -29,4 +29,11 @@ public class PowerUpRotation : MonoBehaviour
 	{
 		this.reverse = reverse;
 	}
+		
+
+
+
+
+
+
 }
