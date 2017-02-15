@@ -46,8 +46,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\EyeCheck.cs" />
-     <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\CameraController.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\FaceUpdate.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\IdleChanger.cs" />
@@ -68,6 +66,10 @@
      <Compile Include="Assets\Resources\Script\Common\SceneChanger.cs" />
      <Compile Include="Assets\Resources\Script\Common\StateMachine.cs" />
      <Compile Include="Assets\Resources\Script\Common\aspectControll.cs" />
+     <Compile Include="Assets\Resources\Script\Game\EyeCheck.cs" />
+     <Compile Include="Assets\Resources\Script\Game\GameManager.cs" />
+     <Compile Include="Assets\Resources\Script\Game\PlayerController.cs" />
+     <Compile Include="Assets\Resources\Script\Game\SentenceManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\AudioManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\ControllerManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\FadeManager.cs" />
@@ -75,7 +77,6 @@
      <Compile Include="Assets\Resources\Script\Manager\ScoreManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\SingletonMonoBehaviour.cs" />
      <Compile Include="Assets\Resources\Script\Manager\UIManager.cs" />
-     <Compile Include="Assets\SentenceManager.cs" />
      <None Include="Assets\Resources\ImportAsset\Character\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
      <None Include="Assets\Resources\ImportAsset\Character\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
      <None Include="Assets\Resources\ImportAsset\Character\UnityChan\license.txt" />
