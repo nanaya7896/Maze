@@ -23,8 +23,9 @@ public class EffectManager : MonoBehaviour {
 		switch (path) {
 		case "Shine":
 			{
-				obj = Instantiate (particle [1], position, Quaternion.identity);
+				obj = Instantiate (particle [1].gameObject, position, Quaternion.identity);
 				obj.transform.SetParent (this.transform);
+				obj.layer = LayerMask.NameToLayer ("Particle");
 			}
 			break;
 		default:
@@ -41,7 +42,7 @@ public class EffectManager : MonoBehaviour {
 	public void AllDeleteParticle()
 	{
 		for (int i = 0; i < transform.childCount; i++) {
-			Destroy(transform.GetChild(i));
+			Destroy(transform.GetChild(i).gameObject);
 		}
 	}
 }

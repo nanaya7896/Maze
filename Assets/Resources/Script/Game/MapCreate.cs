@@ -58,7 +58,7 @@ public class MapCreate : MonoBehaviour {
 		{
 		//xを元に配列の要素を取り出す
 			string x_map =map_matrix_array[x];
-			Debug.Log (x_map);
+			//Debug.Log (x_map);
 			//１配列に格納されている文字の数でx軸をループ
 			for (int z = 0; z < x_map.Length; z++) 
 			{

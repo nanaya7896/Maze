@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour {
 		if (WrapAction (hitTag))
 		{
 			hitTag = string.Empty;
-			ps = PlayerState.IDEL;
+			ps = PlayerState.WARP;
 
 			return;
 		}
@@ -292,9 +292,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	float time=3f;
+	Vector3 playerPos;
+	Vector3 veloCity;
 	void WarpInit()
 	{
-		isWarp[0] = true;
+		
 
 		time = 3f;
 		m_EffectManager.CreateParticle ("Shine", transform.position);
@@ -302,6 +304,7 @@ public class PlayerController : MonoBehaviour {
 
 	void WarpUpdate()
 	{
+		transform.position = Vector3.SmoothDamp (playerPos, new Vector3 (playerPos.x, playerPos.y + 2f,playerPos.z),ref veloCity,1f);
 		if (time < 0f) {
 			ps = PlayerState.IDEL;
 			return;
@@ -318,6 +321,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	//ステートここまで
 
+
 	/// <summary>
 	/// ワープするアクション
 	/// </summary>
@@ -329,7 +333,10 @@ public class PlayerController : MonoBehaviour {
 		switch (gameObjectTag) {
 		case "Wrap_0":
 			//this.transform.position = targetObj [0].transform.position;
-			ps=PlayerState.WARP;
+			//ps=PlayerState.WARP;
+			if(!isWarp[0])
+			playerPos=this.transform.position;
+			isWarp[0] = true;
 			Debug.Log ("行き先はWrap_0");
 			return true;
 		case "Wrap_1":
