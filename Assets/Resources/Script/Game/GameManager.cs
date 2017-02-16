@@ -51,6 +51,18 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	EffectManager effectManager =null;
+	EffectManager m_EffectManager
+	{
+		get
+		{
+			if (effectManager == null) {
+				effectManager = GameObject.FindWithTag ("Effect").GetComponent<EffectManager> ();
+			}
+			return effectManager;
+		}
+	}
+
 	bool[] isOnce = new bool[4];
 	// Use this for initialization
 	void Start () {

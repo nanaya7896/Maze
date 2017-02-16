@@ -40,7 +40,8 @@ public class PlayerController : MonoBehaviour {
 	{
 		IDEL,
 		WALK,
-		JUMP
+		JUMP,
+		WARP
 	}
 
 	private readonly StateMachine<PlayerState> state = new StateMachine<PlayerState> ();
@@ -74,12 +75,24 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	EffectManager effectManager=null;
+	EffectManager m_EffectManager
+	{
+		get
+		{
+			if (effectManager == null) {
+				effectManager = GameObject.FindWithTag ("Effect").GetComponent<EffectManager> ();
+			}
+			return effectManager;
+		}
+	}
 
 	void Awake()
 	{
 		state.Add (PlayerState.IDEL, IdelInit, IdelUpdate, IdelEnd);
 		state.Add (PlayerState.WALK, WalkInit, WalkUpdate, WalkEnd);
 		state.Add (PlayerState.JUMP, JumpInit, JumpUpdate, JumpEnd);
+		state.Add (PlayerState.WARP,WarpInit,WarpUpdate,WarpEnd);
 		ps = PlayerState.IDEL;
 
 		for (int i = 0; i < 4; i++) {
@@ -277,6 +290,32 @@ public class PlayerController : MonoBehaviour {
 	{
 		
 	}
+
+	float time=3f;
+	void WarpInit()
+	{
+		isWarp[0] = true;
+
+		time = 3f;
+		m_EffectManager.CreateParticle ("Shine", transform.position);
+	}
+
+	void WarpUpdate()
+	{
+		if (time < 0f) {
+			ps = PlayerState.IDEL;
+			return;
+		}
+		time -= Time.deltaTime;
+	}
+
+	void WarpEnd()
+	{
+		if (isWarp [0]) {
+			this.transform.position = targetObj [0].transform.position;
+		}
+		m_EffectManager.AllDeleteParticle ();
+	}
 	//ステートここまで
 
 	/// <summary>
@@ -289,8 +328,8 @@ public class PlayerController : MonoBehaviour {
 		
 		switch (gameObjectTag) {
 		case "Wrap_0":
-			this.transform.position = targetObj [0].transform.position;
-			isWarp[0] = true;
+			//this.transform.position = targetObj [0].transform.position;
+			ps=PlayerState.WARP;
 			Debug.Log ("行き先はWrap_0");
 			return true;
 		case "Wrap_1":
