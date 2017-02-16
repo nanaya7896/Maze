@@ -272,19 +272,21 @@ public class PlayerController : MonoBehaviour {
 			this.transform.position = targetObj [0].transform.position;
 			Debug.Log ("行き先はWrap_0");
 			return true;
-			break;
 		case "Wrap_1":
+			this.transform.position = targetObj [1].transform.position;
 			Debug.Log ("行き先はWrap_1");
 			return true;
-			break;
+
 		case "Wrap_2":
+			this.transform.position = targetObj [2].transform.position;
 			Debug.Log ("行き先はWrap_2");
 			return true;
-			break;
+
 		case "Wrap_3":
+			this.transform.position = targetObj [3].transform.position;
 			Debug.Log ("行き先はWrap_3");
 			return true;
-			break;
+
 		case "Target_0":
 			this.transform.position = startObj.transform.position;
 			return true;
@@ -292,15 +294,15 @@ public class PlayerController : MonoBehaviour {
 		case "Target_1":
 			this.transform.position = startObj.transform.position;
 			return true;
-			break;
+
 		case "Target_2":
 			this.transform.position = startObj.transform.position;
 			return true;
-			break;
+
 		case "Target_3":
 			this.transform.position = startObj.transform.position;
 			return true;
-			break;
+
 		default:
 			break;
 		}

@@ -90,8 +90,10 @@ public class MapCreate : MonoBehaviour {
 				default:
 					break;
 				}
-				if(obj !=0)
-				ob.transform.SetParent (_Parent.transform);
+				if (obj != 0) {
+					ob.transform.SetParent (_Parent.transform);
+					ob.layer = LayerMask.NameToLayer ("Map");
+				}
 			}
 
 		}
