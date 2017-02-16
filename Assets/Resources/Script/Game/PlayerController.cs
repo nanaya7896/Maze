@@ -18,17 +18,24 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField,Header("カメラの回転速度")]
 	float cameraRotateSpeed = 1f;
 
-	[SerializeField]
+	[SerializeField,Header("Player視点のカメラ")]
 	Transform MainCamera;
-
+	[SerializeField,Header("ワープで移動する場所")]
 	List<GameObject> targetObj = new List<GameObject> ();
 	private GameObject startObj;
-
+	//前Fの座標を保存する
 	Vector3 prevPos;
-	public string hitTag;
-
+	//ぶつかったオブジェクトのタグ
+	string hitTag;
+	//デバッグ用ヒットタグ
+	public string debugHitTag;
+	//アイテムを取得したかどうかをあらわす
+	[Header("アイテムを取得したかどうか")]
 	public bool[] isItemGet= new bool[4];
-
+	//ワープしたかどうかを判定
+	[Header("ワープ判定に入ったかどうか")]
+	public bool[] isWarp =new bool[4];
+	//Playerの状態遷移
 	public enum PlayerState
 	{
 		IDEL,
@@ -82,9 +89,6 @@ public class PlayerController : MonoBehaviour {
 		if (HitAction (hitTag)) {
 			hitTag = string.Empty;
 		}
-
-
-		//CameraUpdate ();
 		//stateのアップデートをよぶ
 		state.Update ();
 
@@ -182,6 +186,7 @@ public class PlayerController : MonoBehaviour {
 
 		Ray ray=new Ray(this.transform.position,transform.forward);
 		if (Physics.Raycast (ray, out hit, 0.3f)) {
+			debugHitTag = hit.collider.tag;
 			if (Input.GetKeyDown (KeyCode.Return)) {
 				hitTag = hit.collider.tag;
 			}
@@ -270,37 +275,44 @@ public class PlayerController : MonoBehaviour {
 		switch (gameObjectTag) {
 		case "Wrap_0":
 			this.transform.position = targetObj [0].transform.position;
+			isWarp[0] = true;
 			Debug.Log ("行き先はWrap_0");
 			return true;
 		case "Wrap_1":
 			this.transform.position = targetObj [1].transform.position;
+			isWarp[1] = true;
 			Debug.Log ("行き先はWrap_1");
 			return true;
 
 		case "Wrap_2":
 			this.transform.position = targetObj [2].transform.position;
+			isWarp[2] = true;
 			Debug.Log ("行き先はWrap_2");
 			return true;
 
 		case "Wrap_3":
 			this.transform.position = targetObj [3].transform.position;
+			isWarp[3] = true;
 			Debug.Log ("行き先はWrap_3");
 			return true;
 
 		case "Target_0":
 			this.transform.position = startObj.transform.position;
+			isWarp [0] = false;
 			return true;
-			break;
 		case "Target_1":
 			this.transform.position = startObj.transform.position;
+			isWarp [1] = false;
 			return true;
 
 		case "Target_2":
 			this.transform.position = startObj.transform.position;
+			isWarp [2] = false;
 			return true;
 
 		case "Target_3":
 			this.transform.position = startObj.transform.position;
+			isWarp [3] = false;
 			return true;
 
 		default:

@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+
 	PlayerController playerCon =null;
+	/// <summary>
+	/// プレイヤー管理しているところ
+	/// </summary>
+	/// <value>The m player con.</value>
 	PlayerController m_PlayerCon
 	{
 		get
@@ -17,6 +22,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	GameUIManager UIManager=null;
+	/// <summary>
+	/// UIを管理しているところ
+	/// </summary>
+	/// <value>The m user interface manager.</value>
 	GameUIManager m_UIManager
 	{
 		get
@@ -29,6 +38,18 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	MapManager mapManager=null;
+	//mapを管理しているところ
+	MapManager m_MapManager
+	{
+		get
+		{
+			if (mapManager == null) {
+				mapManager = GameObject.Find ("/GameManager/MapManager").GetComponent<MapManager> ();
+			}
+			return mapManager;
+		}
+	}
 
 	bool[] isOnce = new bool[4];
 	// Use this for initialization
@@ -41,36 +62,65 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		SetMainKeyItem ();
+		SetActiveMap ();
 	}
 
 	void SetMainKeyItem()
 	{
-		if (!isOnce [0]) {
-			if (m_PlayerCon.isItemGet [0]) {
-				m_UIManager.SetItemMaterial (0);
-				isOnce [0] = true;
-			}
-
+		
+		if (m_PlayerCon.isItemGet [0]) {
+			m_UIManager.SetItemMaterial (0);
 		}
 
-		if (!isOnce [1]) {
-			if (m_PlayerCon.isItemGet [1]) {
-				m_UIManager.SetItemMaterial (1);
-				isOnce [1] = true;
-			}
+		if (m_PlayerCon.isItemGet [1]) {
+			m_UIManager.SetItemMaterial (1);
+		}
+		
+			
+		if (m_PlayerCon.isItemGet [2]) {
+			m_UIManager.SetItemMaterial (2);
+		}
+		
+			
+		if (m_PlayerCon.isItemGet [3]) {
+			m_UIManager.SetItemMaterial (3);
+		}
+		
+	}
+
+	public void SetActiveMap()
+	{		
+		if (m_PlayerCon.isWarp [0]) {
+			//m_MapManager.ChangeStageActive (0, true);
+			SetAllMapActive(0);
+			return;
+		}
+		else if (m_PlayerCon.isWarp [1]) {
+			//m_MapManager.ChangeStageActive (1, true);
+			SetAllMapActive(1);
+			return;
+		}
+		else if (m_PlayerCon.isWarp [2]) {
+			//m_MapManager.ChangeStageActive (2, true);
+			SetAllMapActive (2);
+			return;
+		}
+		else if (m_PlayerCon.isWarp [3]) {
+			SetAllMapActive (3);
+			return;
+			//m_MapManager.ChangeStageActive (3, true);
 		}
 
-		if (!isOnce [2]) {
-			if (m_PlayerCon.isItemGet [2]) {
-				m_UIManager.SetItemMaterial (2);
-				isOnce [2] = true;
-			}
-		}
+		SetAllMapActive (5);
+	}
 
-		if (!isOnce [3]) {
-			if (m_PlayerCon.isItemGet [3]) {
-				m_UIManager.SetItemMaterial (3);
-				isOnce [3] = true;
+	void SetAllMapActive(int stagenum)
+	{
+		for (int i = 0; i < 4; i++) {
+			if (i == stagenum) {
+				m_MapManager.ChangeStageActive (i, true);
+			} else {
+				m_MapManager.ChangeStageActive (i, false);
 			}
 		}
 	}

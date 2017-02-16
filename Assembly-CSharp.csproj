@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\GameUIManager.cs" />
+     <Compile Include="Assets\MapManager.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\CameraController.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\FaceUpdate.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\IdleChanger.cs" />

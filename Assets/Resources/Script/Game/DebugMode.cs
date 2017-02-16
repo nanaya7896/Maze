@@ -79,7 +79,7 @@ public class DebugMode : MonoBehaviour {
 			GUI.Label (new Rect (10,100 , 200, 100), "Playerの現在のステート : "+m_PlayerCon.ps,DetailStyle);
 			GUI.Label (new Rect (10,150 , 200, 100), "Playerの現在の位置 : "+m_PlayerCon.transform.position,DetailStyle);
 			GUI.Label (new Rect (10,200 , 200, 100), "Playerの現在の向き : "+m_PlayerCon.transform.eulerAngles,DetailStyle);
-			GUI.Label (new Rect (10,250 , 200, 100), "Playerがヒットしたオブジェクト名 : "+m_PlayerCon.hitTag,DetailStyle);
+			GUI.Label (new Rect (10,250 , 200, 100), "Playerがヒットしたオブジェクト名 : "+m_PlayerCon.debugHitTag,DetailStyle);
 			GUI.Label (new Rect (10,300 , 200, 100), "Lightの明るさ : "+m_SpotLight.intensity,DetailStyle);
 			GUI.Label (new Rect (10,350 , 200, 100), "Lightの範囲 : "+m_SpotLight.range,DetailStyle);
 			GUI.Label (new Rect (10,400 , 200, 100), "Lightの色 : "+m_SpotLight.color,DetailStyle);

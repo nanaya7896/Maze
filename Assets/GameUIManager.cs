@@ -17,22 +17,14 @@ public class GameUIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.G)) {
-			itemMesh [0].material = material [0];
-		}
-		if (Input.GetKeyDown (KeyCode.H)) {
-			itemMesh [1].material = material [1];
-		}	
-		if (Input.GetKeyDown (KeyCode.V)) {
-			itemMesh [2].material = material [2];
-		}	
-		if (Input.GetKeyDown (KeyCode.B)) {
-			itemMesh [3].material = material [3];
-		}	
+
 	}
 
 	public void SetItemMaterial(int stageNum)
 	{
+		if (itemMesh [stageNum].material.ToString () == material [stageNum].ToString ()) {
+			return;
+		}
 		itemMesh [stageNum].material = material [stageNum];
 	}
 
