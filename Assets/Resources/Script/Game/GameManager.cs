@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour {
 	bool[] isOnce = new bool[4];
 	// Use this for initialization
 	void Start () {
+
+
 		for (int i = 0; i < 4; i++) {
 			isOnce [i] = false;
 		}

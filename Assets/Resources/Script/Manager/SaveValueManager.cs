@@ -9,8 +9,9 @@ using UnityEngine;
 public class SaveValueManager : SingletonMonoBehaviour<SaveValueManager> {
 
 
+	static int correct;
 	//視力検査の正解数を保存する
-	public int correct
+	public int m_Correct
 	{
 		get
 		{
@@ -45,9 +46,14 @@ public class SaveValueManager : SingletonMonoBehaviour<SaveValueManager> {
 		}
 		DontDestroyOnLoad (this.gameObject);
 
+
+		AllReset ();
 	}
 
-
+	public void AddScore(int val)
+	{
+		correct+=val;
+	}
 
 
 
@@ -66,6 +72,15 @@ public class SaveValueManager : SingletonMonoBehaviour<SaveValueManager> {
 	/// </summary>
 	public void AllReset()
 	{
-		
+		//正解数の初期化
+		correct = 0;
+		//ライトの長さを保管
+		m_MaxLightDistance = 10f;
+	}
+
+	public int GetLightDistance()
+	{
+		//正解すればするほど短くなる
+		return ((int)m_MaxLightDistance - correct);
 	}
 }

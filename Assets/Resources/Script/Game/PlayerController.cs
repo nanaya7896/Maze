@@ -62,6 +62,18 @@ public class PlayerController : MonoBehaviour {
 	}
 
 
+	Light playerLight=null;
+	Light m_PlayerLight
+	{
+		get
+		{
+			if (playerLight == null) {
+				playerLight = GameObject.FindWithTag ("Light").GetComponent<Light> ();
+			}
+			return playerLight;
+		}
+	}
+
 
 	void Awake()
 	{
@@ -74,6 +86,9 @@ public class PlayerController : MonoBehaviour {
 			targetObj.Add (GameObject.FindWithTag ("Target_"+i));
 			isItemGet [i] = false;
 		}
+
+		//正解数に応じてライトのレンジを変更
+		m_PlayerLight.range = SaveValueManager.Instance.GetLightDistance ();
 	}
 		
 	void Start () {

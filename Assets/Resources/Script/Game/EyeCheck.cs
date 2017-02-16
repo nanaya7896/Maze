@@ -28,6 +28,11 @@ public class EyeCheck : MonoBehaviour {
 	KeyCode key;
 	int eyeNumber=0;
 	bool isOnce=false;
+
+	//問題の最大数
+	int maxQuestion=5;
+	//現在の問題数
+	int currentQuestion=1;
 	// Use this for initialization
 	void Start (){
 		isOnce = false;
@@ -45,7 +50,9 @@ public class EyeCheck : MonoBehaviour {
 
 
 	}
-	
+
+
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -60,17 +67,33 @@ public class EyeCheck : MonoBehaviour {
 				if (key == KeyCode.UpArrow || key == KeyCode.DownArrow || key == KeyCode.RightArrow || key == KeyCode.LeftArrow)
 				{
 					if (isCheckSuccess (eyeNumber, key)) {
+						//正解数を加算する
+						SaveValueManager.Instance.AddScore (1);
 						Debug.Log ("正解");
 					} else {
 						Debug.Log ("不正解");
 					}
-					//次の問題に変更
-					SetEyeNumber ();
+					currentQuestion += 1;
+					if (currentQuestion > maxQuestion) 
+					{
+						FadeManager.Instance.LoadLevel (SceneManage.SceneName.GAME,2f,false);
+					}
+					else 
+					{
+						//次の問題に変更
+						SetEyeNumber ();
+					}
 				}
 			}
 		}
 	}
 
+	/// <summary>
+	/// Ises the check success.
+	/// </summary>
+	/// <returns><c>true</c>, if check success was ised, <c>false</c> otherwise.</returns>
+	/// <param name="questionNum">Question number.</param>
+	/// <param name="InputKeyCode">Input key code.</param>
 	bool isCheckSuccess(int questionNum,KeyCode InputKeyCode)
 	{
 		switch (questionNum) 

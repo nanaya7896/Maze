@@ -115,6 +115,7 @@
 'Assets/Resources/Script/Manager/AudioManager.cs'
 'Assets/Resources/Script/Manager/ControllerManager.cs'
 'Assets/Resources/Script/Manager/FadeManager.cs'
+'Assets/Resources/Script/Manager/SaveValueManager.cs'
 'Assets/Resources/Script/Manager/SceneManage.cs'
 'Assets/Resources/Script/Manager/ScoreManager.cs'
 'Assets/Resources/Script/Manager/SingletonMonoBehaviour.cs'
