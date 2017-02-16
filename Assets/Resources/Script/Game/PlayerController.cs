@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour {
 	Vector3 prevPos;
 	public string hitTag;
 
+	public bool[] isItemGet= new bool[4];
+
 	public enum PlayerState
 	{
 		IDEL,
@@ -52,6 +54,8 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+
+
 	void Awake()
 	{
 		state.Add (PlayerState.IDEL, IdelInit, IdelUpdate, IdelEnd);
@@ -61,7 +65,7 @@ public class PlayerController : MonoBehaviour {
 
 		for (int i = 0; i < 4; i++) {
 			targetObj.Add (GameObject.FindWithTag ("Target_"+i));
-
+			isItemGet [i] = false;
 		}
 	}
 		
@@ -75,14 +79,26 @@ public class PlayerController : MonoBehaviour {
 
 	void Update () {
 		PlayerRotate ();
-		HitAction (hitTag);
+		if (HitAction (hitTag)) {
+			hitTag = string.Empty;
+		}
+
 
 		//CameraUpdate ();
 		//stateのアップデートをよぶ
 		state.Update ();
 
+
 		//ステートを変更するところ
 		ChangeState(ps);
+
+		if (WrapAction (hitTag))
+		{
+			hitTag = string.Empty;
+			ps = PlayerState.IDEL;
+
+			return;
+		}
 	}
 
 	/// <summary>
@@ -165,18 +181,19 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		Ray ray=new Ray(this.transform.position,transform.forward);
-		if (Physics.Raycast (ray, out hit, 0.1f)) {
-			hitTag = hit.collider.tag;
-
+		if (Physics.Raycast (ray, out hit, 0.3f)) {
+			if (Input.GetKeyDown (KeyCode.Return)) {
+				hitTag = hit.collider.tag;
+			}
 		}
 
-		if (Input.GetKeyDown (KeyCode.K)) {
+		/*if (Input.GetKeyDown (KeyCode.Return)) {
 			if (WrapAction (hitTag)) {
 				ps = PlayerState.IDEL;
 
 				return;
 			}
-		}
+		}*/
 
 
 	}
@@ -201,16 +218,18 @@ public class PlayerController : MonoBehaviour {
 		Ray ray=new Ray(this.transform.position,transform.forward);
 		if (Physics.Raycast (ray, out hit, 0.1f)) 
 		{
-			hitTag = hit.collider.tag;
+			if (Input.GetKeyDown (KeyCode.Return)) {
+				hitTag = hit.collider.tag;
+			}
 
 		}
-		if (Input.GetKeyDown (KeyCode.Return)) {
+		/*if (Input.GetKeyDown (KeyCode.Return)) {
 			if (WrapAction (hitTag)) {
 				ps = PlayerState.IDEL;
 
 				return;
 			}
-		}
+		}*/
 		PlayerMove ();
 
 		if (prevPos == transform.position) {
@@ -247,6 +266,7 @@ public class PlayerController : MonoBehaviour {
 	/// <param name="gameObjectTag">Game object tag.</param>
 	public bool WrapAction(string gameObjectTag)
 	{
+		
 		switch (gameObjectTag) {
 		case "Wrap_0":
 			this.transform.position = targetObj [0].transform.position;
@@ -289,17 +309,44 @@ public class PlayerController : MonoBehaviour {
 	}
 
 
-	public void HitAction(string gameObjectTag)
+	public bool HitAction(string gameObjectTag)
 	{
 		switch (gameObjectTag) {
 		case "switch":
 			{
-				if (Input.GetKeyDown (KeyCode.Return)) {
-					WallAction.isKeyCheck = true;
-				}
+				//if (Input.GetKeyDown (KeyCode.Return)) {
+				WallAction.isKeyCheck = true;
+				//}
 			}
+			return true;
 			break;
+		case "Item_0":
+			{
+				isItemGet [0] = true;
+				return true;
+				break;
+			}
+		case "Item_1":
+			{
+				isItemGet [1] = true;
+				return true;
+				break;
+			}
+		case "Item_2":
+			{
+				isItemGet [2] = true;
+				return true;
+				break;
+			}
+		case "Item_3":
+			{
+				isItemGet [3] = true;
+				return true;
+				break;
+			}
 		}
+
+		return false;
 	}
 
 

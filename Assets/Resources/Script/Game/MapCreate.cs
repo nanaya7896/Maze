@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class MapCreate : MonoBehaviour {
 
+
 	//Map生成に必要なPrefabを全て格納する
-	[SerializeField]
+	[SerializeField,Header("Map生成に必要なPrefabを全て格納する")]
 	List<GameObject> mapMaterial=new List<GameObject>();
 
 	//Map生成用のマテリアルの名前をつける(番号でふりわける)
@@ -20,18 +21,21 @@ public class MapCreate : MonoBehaviour {
 		Wall_L=5,
 		Wall_SQU =6
 	};
+	[Header("ステージを制作する上での親となるオブジェクトを指定")]
 	public GameObject _Parent;
 	//FloorA 差5.8cm
+	//
 	float floorDir =5.8f;
 	float WallDir_R =3.134f;
 	float WallDir_L =2.59f;
-	string mapMatrix=	"55555555555555555555:" +
-						"11611111116111111161:" +
-						"16111116111116111111:" +
-						"16116111116111116111:" +
-						"11144444444444444444";
-	float r =2.8f;
-
+	string mapMatrix=	"115555555555555555511111166111:" +
+						"116111111161111111616666161166:" +
+						"161111666111661161116666161616:" +
+						"161161111161111161616666161166:" +
+						"111444444444444444446666166166:" +
+						"666000000000000011111111161166:" +
+						"000000000000000066666661111111";
+	public Transform startPosition;
 
 	// Use this for initialization
 	void Start () {
@@ -48,8 +52,6 @@ public class MapCreate : MonoBehaviour {
 	{
 		//：を基準にmap_matrix_arrayを配列として分割しています
 		string[] map_matrix_array = map_Matrix.Split (':');
-
-
 
 		//map_matrix_arrayの配列の数の最大数としてループ
 		for (int x = 0; x < map_matrix_array.Length; x++)
@@ -68,26 +70,27 @@ public class MapCreate : MonoBehaviour {
 					Debug.Log ("空洞です");
 					break;
 				case (int)MaterialName.Floor_1:
-					ob = Instantiate (mapMaterial [obj], new Vector3 (x * floorDir, 0f, z*floorDir), Quaternion.identity);
+					ob = Instantiate (mapMaterial [obj], new Vector3 (startPosition.position.x+x * floorDir, 0f, startPosition.position.z+z*floorDir), Quaternion.identity);
 					break;
 				case (int)MaterialName.Floor_2:
-					ob =Instantiate (mapMaterial [obj], new Vector3 (x*floorDir, 0f, z * floorDir), Quaternion.identity);
+					ob =Instantiate (mapMaterial [obj], new Vector3 (startPosition.position.x+x*floorDir, 0f, startPosition.position.z+z * floorDir), Quaternion.identity);
 					break;
 				case (int)MaterialName.Floor_3:
-					ob=Instantiate (mapMaterial [obj], new Vector3 (x * floorDir, 0f, z * floorDir), Quaternion.identity);
+					ob=Instantiate (mapMaterial [obj], new Vector3 (startPosition.position.x+x * floorDir, 0f, startPosition.position.z+z * floorDir), Quaternion.identity);
 					break;
 				case (int)MaterialName.Wall_R:
-					ob =Instantiate (mapMaterial [obj], new Vector3 (((x *floorDir) -WallDir_R), -0.6f, z * (floorDir)), Quaternion.identity);
+					ob =Instantiate (mapMaterial [obj], new Vector3 (((startPosition.position.x+x *floorDir) -WallDir_R), -0.6f,startPosition.position.z+z * (floorDir)), Quaternion.identity);
 					break;
 				case (int)MaterialName.Wall_L:
-					ob=Instantiate (mapMaterial [obj], new Vector3 (((x * floorDir)+WallDir_L), -0.6f, z * floorDir), Quaternion.identity);
+					ob=Instantiate (mapMaterial [obj], new Vector3 (((startPosition.position.x+x * floorDir)+WallDir_L), -0.6f,startPosition.position.z +z * floorDir), Quaternion.identity);
 					break;
 				case (int)MaterialName.Wall_SQU:
-					ob=Instantiate (mapMaterial [obj], new Vector3 (((x * floorDir)), 0f, z * floorDir), Quaternion.identity);
+					ob=Instantiate (mapMaterial [obj], new Vector3 (((startPosition.position.x+x * floorDir)), 0f, startPosition.position.z+z * floorDir), Quaternion.identity);
 					break;
 				default:
 					break;
 				}
+				if(obj !=0)
 				ob.transform.SetParent (_Parent.transform);
 			}
 
