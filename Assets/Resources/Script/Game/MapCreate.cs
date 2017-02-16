@@ -9,7 +9,8 @@ public class MapCreate : MonoBehaviour {
 	//Map生成に必要なPrefabを全て格納する
 	[SerializeField,Header("Map生成に必要なPrefabを全て格納する")]
 	List<GameObject> mapMaterial=new List<GameObject>();
-
+	[SerializeField,Header("このゲーム攻略となるアイテム")]
+	List<GameObject> keyItem =new List<GameObject>();
 	//Map生成用のマテリアルの名前をつける(番号でふりわける)
 	enum MaterialName
 	{
@@ -37,8 +38,14 @@ public class MapCreate : MonoBehaviour {
 						"000000000000000066666661111111";
 	public Transform startPosition;
 
+	public GameObject parent;
+	public int stageNum;
 	// Use this for initialization
 	void Start () {
+		foreach (GameObject obj in Resources.LoadAll("Prefab/Item/")) {
+			keyItem.Add (obj);
+		}
+
 		CreateFloor (mapMatrix);
 	}
 	
@@ -95,7 +102,22 @@ public class MapCreate : MonoBehaviour {
 					ob.layer = LayerMask.NameToLayer ("Map");
 				}
 			}
+		}
 
+
+		GameObject o = null;
+		//キーアイテムを最後に設置
+		switch (stageNum) {
+		case 0:
+			break;
+		case 1:
+		//	o = Instantiate (keyItem [stageNum], new Vector3 (22.36f, 17.35f, 177.7f), new Quaternion(-90f,0f,-180f,1f));
+		//	o.transform.SetParent (_Parent.transform);
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
 		}
 	}
 }

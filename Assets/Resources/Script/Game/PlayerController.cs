@@ -244,16 +244,6 @@ public class PlayerController : MonoBehaviour {
 				hitTag = hit.collider.tag;
 			}
 		}
-
-		/*if (Input.GetKeyDown (KeyCode.Return)) {
-			if (WrapAction (hitTag)) {
-				ps = PlayerState.IDEL;
-
-				return;
-			}
-		}*/
-
-
 	}
 
 	void IdelEnd()
@@ -281,13 +271,6 @@ public class PlayerController : MonoBehaviour {
 			}
 
 		}
-		/*if (Input.GetKeyDown (KeyCode.Return)) {
-			if (WrapAction (hitTag)) {
-				ps = PlayerState.IDEL;
-
-				return;
-			}
-		}*/
 		PlayerMove ();
 
 		if (prevPos == transform.position) {
@@ -367,7 +350,6 @@ public class PlayerController : MonoBehaviour {
 				playerPos = this.transform.position;
 			}
 			isWarp[stageNum] = true;
-			Debug.Log ("行き先はWrap_0");
 			return true;
 		case "Wrap_1":
 			stageNum = 1;
@@ -376,7 +358,6 @@ public class PlayerController : MonoBehaviour {
 				playerPos = this.transform.position;
 			}
 			isWarp[stageNum] = true;
-			Debug.Log ("行き先はWrap_1");
 			return true;
 
 		case "Wrap_2":
@@ -386,7 +367,6 @@ public class PlayerController : MonoBehaviour {
 				playerPos = this.transform.position;
 			}
 			isWarp[stageNum] = true;
-			Debug.Log ("行き先はWrap_2");
 			return true;
 
 		case "Wrap_3":
@@ -396,7 +376,6 @@ public class PlayerController : MonoBehaviour {
 				playerPos = this.transform.position;
 			}
 			isWarp[stageNum] = true;
-			Debug.Log ("行き先はWrap_3");
 			return true;
 
 		case "Target_0":

@@ -140,4 +140,15 @@ public class SentenceManager : MonoBehaviour {
 			}
 		}
 	}
+
+
+	public int GetSentenceNumber()
+	{
+		return sentenceNumber;
+	}
+
+	public bool GetisSentenceEnd()
+	{
+		return m_isSentenceEnd;
+	}
 }
