@@ -35,6 +35,17 @@ public class PlayerController : MonoBehaviour {
 	//ワープしたかどうかを判定
 	[Header("ワープ判定に入ったかどうか")]
 	public bool[] isWarp =new bool[4];
+
+	//ワープするまでの時間
+	float time=4f;
+	//プレイヤーのワープ時点でのポジション
+	Vector3 playerPos;
+	//ワープするときの浮遊地点
+	Vector3 WarpPosition;
+	//速度
+	Vector3 vel;
+
+	public int stageNum=0;
 	//Playerの状態遷移
 	public enum PlayerState
 	{
@@ -87,6 +98,18 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	Rigidbody rigid=null;
+	Rigidbody m_Rigid
+	{
+		get
+		{
+			if (rigid == null) {
+				rigid = GetComponent<Rigidbody> ();
+			}
+			return rigid;
+		}
+	}
+
 	void Awake()
 	{
 		state.Add (PlayerState.IDEL, IdelInit, IdelUpdate, IdelEnd);
@@ -126,7 +149,9 @@ public class PlayerController : MonoBehaviour {
 
 		if (WrapAction (hitTag))
 		{
+			
 			hitTag = string.Empty;
+			if(isWarp[stageNum])
 			ps = PlayerState.WARP;
 
 			return;
@@ -291,20 +316,21 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 
-	float time=3f;
-	Vector3 playerPos;
-	Vector3 veloCity;
 	void WarpInit()
 	{
 		
-
-		time = 3f;
+		WarpPosition = new Vector3 (playerPos.x, playerPos.y + 0.5f, playerPos.z);
+		m_Rigid.useGravity = false;
+		time = 4f;
 		m_EffectManager.CreateParticle ("Shine", transform.position);
+
+
 	}
 
 	void WarpUpdate()
 	{
-		transform.position = Vector3.SmoothDamp (playerPos, new Vector3 (playerPos.x, playerPos.y + 2f,playerPos.z),ref veloCity,1f);
+		transform.position = Vector3.SmoothDamp (transform.position,WarpPosition ,ref vel,3f);
+
 		if (time < 0f) {
 			ps = PlayerState.IDEL;
 			return;
@@ -314,9 +340,10 @@ public class PlayerController : MonoBehaviour {
 
 	void WarpEnd()
 	{
-		if (isWarp [0]) {
-			this.transform.position = targetObj [0].transform.position;
+		if (isWarp [stageNum]) {
+			this.transform.position = targetObj [stageNum].transform.position;
 		}
+		m_Rigid.useGravity = true;
 		m_EffectManager.AllDeleteParticle ();
 	}
 	//ステートここまで
@@ -330,30 +357,45 @@ public class PlayerController : MonoBehaviour {
 	public bool WrapAction(string gameObjectTag)
 	{
 		
-		switch (gameObjectTag) {
+		switch (gameObjectTag)
+		{
 		case "Wrap_0":
+			stageNum = 0;
 			//this.transform.position = targetObj [0].transform.position;
 			//ps=PlayerState.WARP;
-			if(!isWarp[0])
-			playerPos=this.transform.position;
-			isWarp[0] = true;
+			if (!isWarp [stageNum]) {
+				playerPos = this.transform.position;
+			}
+			isWarp[stageNum] = true;
 			Debug.Log ("行き先はWrap_0");
 			return true;
 		case "Wrap_1":
-			this.transform.position = targetObj [1].transform.position;
-			isWarp[1] = true;
+			stageNum = 1;
+			//this.transform.position = targetObj [stageNum].transform.position;
+			if (!isWarp [stageNum]) {
+				playerPos = this.transform.position;
+			}
+			isWarp[stageNum] = true;
 			Debug.Log ("行き先はWrap_1");
 			return true;
 
 		case "Wrap_2":
-			this.transform.position = targetObj [2].transform.position;
-			isWarp[2] = true;
+			stageNum = 2;
+			//this.transform.position = targetObj [stageNum].transform.position;
+			if (!isWarp [stageNum]) {
+				playerPos = this.transform.position;
+			}
+			isWarp[stageNum] = true;
 			Debug.Log ("行き先はWrap_2");
 			return true;
 
 		case "Wrap_3":
-			this.transform.position = targetObj [3].transform.position;
-			isWarp[3] = true;
+			stageNum = 3;
+			//this.transform.position = targetObj [stageNum].transform.position;
+			if (!isWarp [stageNum]) {
+				playerPos = this.transform.position;
+			}
+			isWarp[stageNum] = true;
 			Debug.Log ("行き先はWrap_3");
 			return true;
 
@@ -379,6 +421,7 @@ public class PlayerController : MonoBehaviour {
 		default:
 			break;
 		}
+
 
 		return false;
 	}

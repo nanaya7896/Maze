@@ -83,8 +83,8 @@ public class DebugMode : MonoBehaviour {
 			GUI.Label (new Rect (10,300 , 200, 100), "Lightの明るさ : "+m_SpotLight.intensity,DetailStyle);
 			GUI.Label (new Rect (10,350 , 200, 100), "Lightの範囲 : "+m_SpotLight.range,DetailStyle);
 			GUI.Label (new Rect (10,400 , 200, 100), "Lightの色 : "+m_SpotLight.color,DetailStyle);
-			/*GUI.Label (new Rect (10,500 , 200, 100), "",DetailStyle);
-			GUI.Label (new Rect (10,550 , 200, 100), "",DetailStyle);
+			GUI.Label (new Rect (10,450 , 200, 100), "Stageの番号 : "+m_PlayerCon.stageNum,DetailStyle);
+			/*GUI.Label (new Rect (10,550 , 200, 100), "",DetailStyle);
 			GUI.Label (new Rect (10,600 , 200, 100), "",DetailStyle);
 			GUI.Label (new Rect (10,650 , 200, 100), "",DetailStyle);
 			GUI.Label (new Rect (10,700 , 200, 100), "",DetailStyle);
