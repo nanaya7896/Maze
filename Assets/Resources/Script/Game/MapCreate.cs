@@ -29,13 +29,18 @@ public class MapCreate : MonoBehaviour {
 	float floorDir =5.8f;
 	float WallDir_R =3.134f;
 	float WallDir_L =2.59f;
-	string mapMatrix=	"115555555555555555511111166111:" +
+	string stage2Matrix="115555555555555555511111166111:" +
 						"116111111161111111616666161166:" +
 						"161111666111661161116666161616:" +
 						"161161111161111161616666161166:" +
 						"111444444444444444446666166166:" +
 						"666000000000000011111111161166:" +
 						"000000000000000066666661111111";
+
+	string stage3Matrix =":";
+
+	string stage4Matrix=":";
+
 	public Transform startPosition;
 
 	public GameObject parent;
@@ -45,8 +50,28 @@ public class MapCreate : MonoBehaviour {
 		foreach (GameObject obj in Resources.LoadAll("Prefab/Item/")) {
 			keyItem.Add (obj);
 		}
-
-		CreateFloor (mapMatrix);
+		switch(stageNum)
+		{
+		case 0:
+			{
+				break;
+			}
+		case 1:
+			{
+				CreateFloor (stage2Matrix);
+				break;
+			}
+		case 2:
+			{
+				CreateFloor (stage3Matrix);
+				break;
+			}
+		case 3:
+			{
+				CreateFloor(stage4Matrix);
+				break;
+			}
+		}
 	}
 	
 	// Update is called once per frame
