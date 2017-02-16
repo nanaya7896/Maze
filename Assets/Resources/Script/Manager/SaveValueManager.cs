@@ -23,7 +23,7 @@ public class SaveValueManager : SingletonMonoBehaviour<SaveValueManager> {
 		}
 	}
 
-	float MaxLightDistance=10.0f;
+	float MaxLightDistance=11.0f;
 	//ライトの最大の長さを保存
 	public float m_MaxLightDistance
 	{
@@ -75,7 +75,7 @@ public class SaveValueManager : SingletonMonoBehaviour<SaveValueManager> {
 		//正解数の初期化
 		correct = 0;
 		//ライトの長さを保管
-		m_MaxLightDistance = 10f;
+		m_MaxLightDistance = 11f;
 	}
 
 	public int GetLightDistance()

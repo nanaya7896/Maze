@@ -68,7 +68,7 @@ public class EyeCheck : MonoBehaviour {
 				{
 					if (isCheckSuccess (eyeNumber, key)) {
 						//正解数を加算する
-						SaveValueManager.Instance.AddScore (1);
+						SaveValueManager.Instance.AddScore (2);
 						Debug.Log ("正解");
 					} else {
 						Debug.Log ("不正解");
