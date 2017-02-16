@@ -46,7 +46,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\DebugMode.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\CameraController.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\FaceUpdate.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\IdleChanger.cs" />
@@ -68,10 +67,13 @@
      <Compile Include="Assets\Resources\Script\Common\SceneChanger.cs" />
      <Compile Include="Assets\Resources\Script\Common\StateMachine.cs" />
      <Compile Include="Assets\Resources\Script\Common\aspectControll.cs" />
+     <Compile Include="Assets\Resources\Script\Game\DebugMode.cs" />
      <Compile Include="Assets\Resources\Script\Game\EyeCheck.cs" />
      <Compile Include="Assets\Resources\Script\Game\GameManager.cs" />
+     <Compile Include="Assets\Resources\Script\Game\MapCreate.cs" />
      <Compile Include="Assets\Resources\Script\Game\PlayerController.cs" />
      <Compile Include="Assets\Resources\Script\Game\SentenceManager.cs" />
+     <Compile Include="Assets\Resources\Script\Game\WallAction.cs" />
      <Compile Include="Assets\Resources\Script\Manager\AudioManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\ControllerManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\FadeManager.cs" />
@@ -79,7 +81,6 @@
      <Compile Include="Assets\Resources\Script\Manager\ScoreManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\SingletonMonoBehaviour.cs" />
      <Compile Include="Assets\Resources\Script\Manager\UIManager.cs" />
-     <Compile Include="Assets\WallAction.cs" />
      <None Include="Assets\Resources\ImportAsset\Character\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
