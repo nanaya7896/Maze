@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 [ExecuteInEditMode]
-
 public class aspectControll : MonoBehaviour {
 
 	//アスペクト比
