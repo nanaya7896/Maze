@@ -55,10 +55,12 @@ public class SentenceManager : MonoBehaviour {
 		wordNumber = 0;
 		//文章の番号は0から
 		sentenceNumber=0;
-		for (int i = 0; i < 2; i++) 
+	/*	
+	 * for (int i = 0; i < 2; i++) 
 		{
 			childObj.Add (GameObject.FindGameObjectsWithTag ("Wrod") [i]);
 		}
+		*/
 		childObj [1].SetActive (isActive);
 		isSentenceEnd = false;
 		//SubStringで最初の文字から何番目あで描画するか決定する

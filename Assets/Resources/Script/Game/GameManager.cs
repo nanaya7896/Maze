@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
 
+
+
 	PlayerController playerCon =null;
 	/// <summary>
 	/// プレイヤー管理しているところ
@@ -63,6 +65,31 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+
+	enum GameState
+	{
+		INIT,
+		PLAY,
+		STOP,
+		GAMEOVER,
+		CLEAR
+	}
+
+	private readonly StateMachine<GameState> state = new StateMachine<GameState> ();
+
+	void Awake()
+	{
+		/*
+		state.Add (GameState.INIT, InitInit, InitUpdate, InitEnd);
+		state.Add (GameState.PLAY, PlayInit, PlayUpdate, PlayEnd);
+		state.Add (GameState.STOP, StopInit, StopUpdate, StopEnd);
+		state.Add (GameState.GAMEOVER, GameOverInit, null, null);
+		state.Add(GameState.CLEAR,ClearInit,null,null);
+
+		state.SetState (GameState.INIT);
+		*/
+	}
+
 	bool[] isOnce = new bool[4];
 	// Use this for initialization
 	void Start () {
@@ -75,9 +102,71 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//ステートマシンのUpdate
+		//state.Update ();
 		SetMainKeyItem ();
 		SetActiveMap ();
 	}
+
+
+	//================================ステートマシン======================//
+
+	void InitInit()
+	{
+		//移動できない状態にする
+		m_PlayerCon.m_isMove = false;
+	}
+	void InitUpdate()
+	{
+		state.SetState (GameState.PLAY);
+	}
+	void InitEnd()
+	{
+		
+	}
+
+	void PlayInit()
+	{
+		m_PlayerCon.m_isMove = true;
+	}
+
+	void PlayUpdate()
+	{
+
+	}
+
+	void PlayEnd()
+	{
+		
+	}
+
+	void StopInit()
+	{
+		
+	}
+
+	void StopUpdate()
+	{
+		
+	}
+
+	void StopEnd()
+	{
+		
+	}
+
+	void GameOverInit()
+	{
+		
+	}
+
+	void ClearInit()
+	{
+		
+	}
+
+	//================================ここまで======================//
+
 
 	void SetMainKeyItem()
 	{

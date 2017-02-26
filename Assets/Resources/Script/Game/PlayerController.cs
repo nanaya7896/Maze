@@ -35,6 +35,18 @@ public class PlayerController : MonoBehaviour {
 	//ワープしたかどうかを判定
 	[Header("ワープ判定に入ったかどうか")]
 	public bool[] isWarp =new bool[4];
+	bool isMove=false;
+	public bool m_isMove
+	{
+		get
+		{
+			return isMove;
+		}
+		set
+		{
+			isMove = value;
+		}
+	}
 
 	//ワープするまでの時間
 	float time=4f;
@@ -231,17 +243,19 @@ public class PlayerController : MonoBehaviour {
 
 	void IdelUpdate()
 	{
-		
-		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) {
-			SetAnimState ("isWalk", true);
-			ps = PlayerState.WALK;
-		}
+		if (m_isMove) 
+		{
+			if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D)) {
+				SetAnimState ("isWalk", true);
+				ps = PlayerState.WALK;
+			}
 
-		Ray ray=new Ray(this.transform.position,transform.forward);
-		if (Physics.Raycast (ray, out hit, 0.3f)) {
-			debugHitTag = hit.collider.tag;
-			if (Input.GetKeyDown (KeyCode.Return)) {
-				hitTag = hit.collider.tag;
+			Ray ray = new Ray (this.transform.position, transform.forward);
+			if (Physics.Raycast (ray, out hit, 0.3f)) {
+				debugHitTag = hit.collider.tag;
+				if (Input.GetKeyDown (KeyCode.Return)) {
+					hitTag = hit.collider.tag;
+				}
 			}
 		}
 	}
@@ -271,10 +285,14 @@ public class PlayerController : MonoBehaviour {
 			}
 
 		}
-		PlayerMove ();
+		//動ける状態なら
+		if (m_isMove)
+		{
+			PlayerMove ();
 
-		if (prevPos == transform.position) {
-			ps = PlayerState.IDEL;
+			if (prevPos == transform.position) {
+				ps = PlayerState.IDEL;
+			}
 		}
 
 	}
