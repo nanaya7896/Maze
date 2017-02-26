@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ButtonText.cs" />
      <Compile Include="Assets\EffectManager.cs" />
      <Compile Include="Assets\GameUIManager.cs" />
      <Compile Include="Assets\MapManager.cs" />

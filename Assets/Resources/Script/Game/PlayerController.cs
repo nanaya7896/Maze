@@ -122,6 +122,19 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	ButtonText bText=null;
+	ButtonText m_bText
+	{
+		get
+		{
+			if (bText == null) {
+				bText = GameObject.Find ("ButtonText").GetComponent<ButtonText>();
+			}
+			return bText;
+		}
+	}
+
+
 	void Awake()
 	{
 		state.Add (PlayerState.IDEL, IdelInit, IdelUpdate, IdelEnd);
@@ -267,7 +280,7 @@ public class PlayerController : MonoBehaviour {
 
 	void WalkInit()
 	{
-		
+		m_bText.SetText (" ");
 	}
 
 	RaycastHit hit;
@@ -319,7 +332,7 @@ public class PlayerController : MonoBehaviour {
 
 	void WarpInit()
 	{
-		
+		m_isMove = false;
 		WarpPosition = new Vector3 (playerPos.x, playerPos.y + 0.5f, playerPos.z);
 		m_Rigid.useGravity = false;
 		time = 4f;
@@ -346,6 +359,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		m_Rigid.useGravity = true;
 		m_EffectManager.AllDeleteParticle ();
+		m_isMove = true;
 	}
 	//ステートここまで
 
@@ -429,6 +443,7 @@ public class PlayerController : MonoBehaviour {
 		switch (gameObjectTag) {
 		case "switch":
 			{
+				m_bText.SetText ("PressReturn");
 				//if (Input.GetKeyDown (KeyCode.Return)) {
 				WallAction.isKeyCheck = true;
 				//}
@@ -465,5 +480,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 
-
+	void OnCollisionStay()
+	{
+		
+	}
 }

@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour {
 
 	void Awake()
 	{
-		/*
+		
 		state.Add (GameState.INIT, InitInit, InitUpdate, InitEnd);
 		state.Add (GameState.PLAY, PlayInit, PlayUpdate, PlayEnd);
 		state.Add (GameState.STOP, StopInit, StopUpdate, StopEnd);
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour {
 		state.Add(GameState.CLEAR,ClearInit,null,null);
 
 		state.SetState (GameState.INIT);
-		*/
+
 	}
 
 	bool[] isOnce = new bool[4];
@@ -103,9 +103,8 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//ステートマシンのUpdate
-		//state.Update ();
-		SetMainKeyItem ();
-		SetActiveMap ();
+		state.Update ();
+
 	}
 
 
@@ -132,7 +131,8 @@ public class GameManager : MonoBehaviour {
 
 	void PlayUpdate()
 	{
-
+		SetMainKeyItem ();
+		SetActiveMap ();
 	}
 
 	void PlayEnd()
@@ -226,5 +226,14 @@ public class GameManager : MonoBehaviour {
 				m_MapManager.ChangeStageActive (i, false);
 			}
 		}
+	}
+
+	/// <summary>
+	/// 現在のステートの名前が返ってくる
+	/// </summary>
+	/// <returns>The current state.</returns>
+	public string GetCurrentState()
+	{
+		return state.GetCurrentStateName ();
 	}
 }

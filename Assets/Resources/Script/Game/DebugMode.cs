@@ -75,15 +75,17 @@ public class DebugMode : MonoBehaviour {
 		{
 			GUI.Box (new Rect(0,0,Screen.width /3f,Screen.height),"");
 			GUI.Label (new Rect (10,0 , 200, 100), "GameMode : DebugMode",DetailStyle);
-			GUI.Label (new Rect (10,50 , 200, 100), "現在のシーン : "+ SceneManage.Instance.GetCurrentSceneName(),DetailStyle);
-			GUI.Label (new Rect (10,100 , 200, 100), "Playerの現在のステート : "+m_PlayerCon.ps,DetailStyle);
-			GUI.Label (new Rect (10,150 , 200, 100), "Playerの現在の位置 : "+m_PlayerCon.transform.position,DetailStyle);
-			GUI.Label (new Rect (10,200 , 200, 100), "Playerの現在の向き : "+m_PlayerCon.transform.eulerAngles,DetailStyle);
-			GUI.Label (new Rect (10,250 , 200, 100), "Playerがヒットしたオブジェクト名 : "+m_PlayerCon.debugHitTag,DetailStyle);
-			GUI.Label (new Rect (10,300 , 200, 100), "Lightの明るさ : "+m_SpotLight.intensity,DetailStyle);
-			GUI.Label (new Rect (10,350 , 200, 100), "Lightの範囲 : "+m_SpotLight.range,DetailStyle);
-			GUI.Label (new Rect (10,400 , 200, 100), "Lightの色 : "+m_SpotLight.color,DetailStyle);
-			GUI.Label (new Rect (10,450 , 200, 100), "Stageの番号 : "+m_PlayerCon.stageNum,DetailStyle);
+			GUI.Label (new Rect (10,50 , 200, 100), "現在のゲームのステート : "+m_gManager.GetCurrentState(),DetailStyle);
+			GUI.Label (new Rect (10,100 , 200, 100), "現在のシーン : "+ SceneManage.Instance.GetCurrentSceneName(),DetailStyle);
+			GUI.Label (new Rect (10,150 , 200, 100), "Playerの現在のステート : "+m_PlayerCon.ps,DetailStyle);
+			GUI.Label (new Rect (10,200 , 200, 100), "Playerの現在の位置 : "+m_PlayerCon.transform.position,DetailStyle);
+			GUI.Label (new Rect (10,250 , 200, 100), "Playerの現在の向き : "+m_PlayerCon.transform.eulerAngles,DetailStyle);
+			GUI.Label (new Rect (10,300 , 200, 100), "Playerがヒットしたオブジェクト名 : "+m_PlayerCon.debugHitTag,DetailStyle);
+			GUI.Label (new Rect (10,350 , 200, 100), "Lightの明るさ : "+m_SpotLight.intensity,DetailStyle);
+			GUI.Label (new Rect (10,400 , 200, 100), "Lightの範囲 : "+m_SpotLight.range,DetailStyle);
+			GUI.Label (new Rect (10,450 , 200, 100), "Lightの色 : "+m_SpotLight.color,DetailStyle);
+			GUI.Label (new Rect (10,500 , 200, 100), "Stageの番号 : "+m_PlayerCon.stageNum,DetailStyle);
+
 			/*GUI.Label (new Rect (10,550 , 200, 100), "",DetailStyle);
 			GUI.Label (new Rect (10,600 , 200, 100), "",DetailStyle);
 			GUI.Label (new Rect (10,650 , 200, 100), "",DetailStyle);
