@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour {
 		for (int i = 0; i < 4; i++) {
 			isOnce [i] = false;
 		}
+
 	}
 	
 	// Update is called once per frame
@@ -112,6 +113,7 @@ public class GameManager : MonoBehaviour {
 
 	void InitInit()
 	{
+		m_UIManager.ResetItem ();
 		//移動できない状態にする
 		m_PlayerCon.m_isMove = false;
 	}
@@ -131,6 +133,13 @@ public class GameManager : MonoBehaviour {
 
 	void PlayUpdate()
 	{
+
+		//アイテムを全て取得していたら
+		if (m_UIManager.isGetAllItem ()) {
+			state.SetState (GameState.CLEAR);
+		}
+
+
 		SetMainKeyItem ();
 		SetActiveMap ();
 	}

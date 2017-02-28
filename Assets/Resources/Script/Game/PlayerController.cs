@@ -173,15 +173,14 @@ public class PlayerController : MonoBehaviour {
 		//ステートを変更するところ
 		ChangeState(ps);
 
-		if (WrapAction (hitTag))
+		/*if (WrapAction (hitTag))
 		{
-			
 			hitTag = string.Empty;
-			if(isWarp[stageNum])
-			ps = PlayerState.WARP;
-
+			if (isWarp [stageNum]) {
+				ps = PlayerState.WARP;
+			}
 			return;
-		}
+		}*/
 	}
 
 	/// <summary>
@@ -294,10 +293,7 @@ public class PlayerController : MonoBehaviour {
 		Ray ray=new Ray(this.transform.position,transform.forward);
 		if (Physics.Raycast (ray, out hit, 0.1f)) 
 		{
-			if (Input.GetKeyDown (KeyCode.Return)) {
-				hitTag = hit.collider.tag;
-			}
-
+			hitTag = hit.collider.tag;
 		}
 		//動ける状態なら
 		if (m_isMove)
@@ -313,7 +309,7 @@ public class PlayerController : MonoBehaviour {
 
 	void WalkEnd()
 	{
-		m_bText.SetText ("");
+		m_bText.SetText (" ");
 	}
 
 	void JumpInit()
@@ -361,11 +357,11 @@ public class PlayerController : MonoBehaviour {
 		m_Rigid.useGravity = true;
 		m_EffectManager.AllDeleteParticle ();
 		m_isMove = true;
-		m_bText.SetText ("");
+		m_bText.SetText (" ");
 	}
 	//ステートここまで
 
-
+	bool isAction=false;
 	/// <summary>
 	/// ワープするアクション
 	/// </summary>
@@ -374,68 +370,70 @@ public class PlayerController : MonoBehaviour {
 	public bool WrapAction(string gameObjectTag)
 	{
 		
-		switch (gameObjectTag)
+		if (Input.GetKeyDown (KeyCode.Return)) 
 		{
-		case "Wrap_0":
-			stageNum = 0;
+			
+				switch (gameObjectTag) {
+				case "Wrap_0":
+					stageNum = 0;
 			//this.transform.position = targetObj [0].transform.position;
 			//ps=PlayerState.WARP;
-			if (!isWarp [stageNum]) {
-				playerPos = this.transform.position;
-			}
-			isWarp[stageNum] = true;
-			return true;
-		case "Wrap_1":
-			stageNum = 1;
+					if (!isWarp [stageNum]) {
+						playerPos = this.transform.position;
+					}
+					isWarp [stageNum] = true;
+					return true;
+				case "Wrap_1":
+					stageNum = 1;
 			//this.transform.position = targetObj [stageNum].transform.position;
-			if (!isWarp [stageNum]) {
-				playerPos = this.transform.position;
-			}
-			isWarp[stageNum] = true;
-			return true;
+					if (!isWarp [stageNum]) {
+						playerPos = this.transform.position;
+					}
+					isWarp [stageNum] = true;
+					return true;
 
-		case "Wrap_2":
-			stageNum = 2;
+				case "Wrap_2":
+					stageNum = 2;
 			//this.transform.position = targetObj [stageNum].transform.position;
-			if (!isWarp [stageNum]) {
-				playerPos = this.transform.position;
-			}
-			isWarp[stageNum] = true;
-			return true;
+					if (!isWarp [stageNum]) {
+						playerPos = this.transform.position;
+					}
+					isWarp [stageNum] = true;
+					return true;
 
-		case "Wrap_3":
-			stageNum = 3;
+				case "Wrap_3":
+					stageNum = 3;
 			//this.transform.position = targetObj [stageNum].transform.position;
-			if (!isWarp [stageNum]) {
-				playerPos = this.transform.position;
+					if (!isWarp [stageNum]) {
+						playerPos = this.transform.position;
+					}
+					isWarp [stageNum] = true;
+					return true;
+
+				case "Target_0":
+					this.transform.position = startObj.transform.position;
+					isWarp [0] = false;
+					return true;
+				case "Target_1":
+					this.transform.position = startObj.transform.position;
+					isWarp [1] = false;
+					return true;
+
+				case "Target_2":
+					this.transform.position = startObj.transform.position;
+					isWarp [2] = false;
+					return true;
+
+				case "Target_3":
+					this.transform.position = startObj.transform.position;
+					isWarp [3] = false;
+					return true;
+
+				default:
+					break;
+				}
+				return false;
 			}
-			isWarp[stageNum] = true;
-			return true;
-
-		case "Target_0":
-			this.transform.position = startObj.transform.position;
-			isWarp [0] = false;
-			return true;
-		case "Target_1":
-			this.transform.position = startObj.transform.position;
-			isWarp [1] = false;
-			return true;
-
-		case "Target_2":
-			this.transform.position = startObj.transform.position;
-			isWarp [2] = false;
-			return true;
-
-		case "Target_3":
-			this.transform.position = startObj.transform.position;
-			isWarp [3] = false;
-			return true;
-
-		default:
-			break;
-		}
-
-
 		return false;
 	}
 
@@ -541,7 +539,13 @@ public class PlayerController : MonoBehaviour {
 				//m_bText.TextAlphaUpdate ();
 				break;
 			}
-			break;
+
+
+		}
+		if (WrapAction (col.GetComponent<Collider> ().tag)) {
+			if (isWarp [stageNum]) {
+				ps = PlayerState.WARP;
+			}
 		}
 	}
 
