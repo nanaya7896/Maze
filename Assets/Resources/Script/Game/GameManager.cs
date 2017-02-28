@@ -131,7 +131,9 @@ public class GameManager : MonoBehaviour {
 	void PlayInit()
 	{
 		m_PlayerCon.m_isMove = true;
+		AudioManager.Instance.PlayBGM ("GameBGM_1");
 	}
+
 
 	void PlayUpdate()
 	{

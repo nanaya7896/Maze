@@ -12,6 +12,15 @@ public class GameUIManager : MonoBehaviour {
 
 	public Image black;
 
+	void Update()
+	{
+		for (int i = 0; i < 4; i++) {
+			
+			if (itemMesh [i].material.ToString() != material [4].ToString()) {
+				
+			}
+		}
+	}
 
 	public void SetItemMaterial(int stageNum)
 	{
@@ -29,7 +38,7 @@ public class GameUIManager : MonoBehaviour {
 	{
 		int count = 0;
 		for (int i = 0; i < 4; i++) {
-			Debug.Log (itemMesh [i].material.ToString ());
+			//Debug.Log (itemMesh [i].material.ToString ());
 			if (itemMesh [i].material.ToString() != material [4].ToString()) {
 				count++;
 			}

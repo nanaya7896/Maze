@@ -201,6 +201,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			SetAnimState ("isRun", true);
 			speed = runSpeed;
+
 		}
 		else
 		{
@@ -279,12 +280,13 @@ public class PlayerController : MonoBehaviour {
 	void WalkInit()
 	{
 		m_bText.SetText ("");
+		AudioManager.Instance.PlaySEloop ("footStepSE");
 	}
 
 	RaycastHit hit;
 	void WalkUpdate()
 	{
-
+		
 
 		prevPos = transform.position;
 
@@ -308,6 +310,7 @@ public class PlayerController : MonoBehaviour {
 	void WalkEnd()
 	{
 		m_bText.SetText (" ");
+		AudioManager.Instance.StopSE ();
 	}
 
 	void JumpInit()
@@ -332,7 +335,7 @@ public class PlayerController : MonoBehaviour {
 		m_Rigid.useGravity = false;
 		time = 4f;
 		m_EffectManager.CreateParticle ("Shine", transform.position);
-
+		AudioManager.Instance.PlaySE ("WarpSE");
 
 	}
 
@@ -441,7 +444,7 @@ public class PlayerController : MonoBehaviour {
 		switch (gameObjectTag) {
 		case "switch":
 			{
-				
+				AudioManager.Instance.PlaySE("switchSE");
 				//if (Input.GetKeyDown (KeyCode.Return)) {
 				WallAction.isKeyCheck = true;
 				//}
