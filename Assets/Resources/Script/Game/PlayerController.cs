@@ -86,13 +86,14 @@ public class PlayerController : MonoBehaviour {
 	}
 
 
-	Light playerLight=null;
+	public Light playerLight=null;
 	Light m_PlayerLight
 	{
 		get
 		{
 			if (playerLight == null) {
-				playerLight = GameObject.FindWithTag ("Light").GetComponent<Light> ();
+				//playerLight = GameObject.FindWithTag ("Light").GetComponent<Light> ();
+				playerLight =GameObject.Find("Spotlight").GetComponent<Light>();
 			}
 			return playerLight;
 		}
@@ -258,18 +259,15 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (m_isMove) 
 		{
-			if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D)) 
-			{
+			if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D)) {
 				SetAnimState ("isWalk", true);
 				ps = PlayerState.WALK;
 			}
 
 			Ray ray = new Ray (this.transform.position, transform.forward);
-			if (Physics.Raycast (ray, out hit, 0.3f)) 
-			{
+			if (Physics.Raycast (ray, out hit, 0.3f)) {
 				debugHitTag = hit.collider.tag;
-				if (Input.GetKeyDown (KeyCode.Return)) 
-				{
+				if (Input.GetKeyDown (KeyCode.Return)) {
 					hitTag = hit.collider.tag;
 				}
 			}
@@ -315,7 +313,7 @@ public class PlayerController : MonoBehaviour {
 
 	void WalkEnd()
 	{
-		m_bText.SetText (" ");
+		m_bText.SetText ("");
 	}
 
 	void JumpInit()
@@ -363,7 +361,7 @@ public class PlayerController : MonoBehaviour {
 		m_Rigid.useGravity = true;
 		m_EffectManager.AllDeleteParticle ();
 		m_isMove = true;
-		m_bText.SetText (" ");
+		m_bText.SetText ("");
 	}
 	//ステートここまで
 
