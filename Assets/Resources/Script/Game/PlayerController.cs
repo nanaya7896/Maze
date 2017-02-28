@@ -215,9 +215,7 @@ public class PlayerController : MonoBehaviour {
 	/// </summary>
 	void PlayerRotate()
 	{
-		
-		transform.Rotate (0f, Input.GetAxis("RightAndLeft")*cameraRotateSpeed *Time.deltaTime, 0f);
-
+		transform.Rotate (Input.GetAxis("UpAndDown")*cameraRotateSpeed*Time.deltaTime, Input.GetAxis("RightAndLeft")*cameraRotateSpeed *Time.deltaTime, 0f);
 	}
 
 	/// <summary>

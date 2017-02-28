@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GameUIManager : MonoBehaviour {
 
 
@@ -10,6 +10,7 @@ public class GameUIManager : MonoBehaviour {
 	[SerializeField]
 	List<Material> material =new List<Material>();
 
+	public Image black;
 
 
 	public void SetItemMaterial(int stageNum)
@@ -18,6 +19,10 @@ public class GameUIManager : MonoBehaviour {
 			return;
 		}
 		itemMesh [stageNum].material = material [stageNum];
+	}
+	public void SetPoseTexture(float alpha)
+	{
+		black.color = new Color (0f, 0f, 0f, alpha);
 	}
 
 	public bool isGetAllItem()
@@ -38,6 +43,7 @@ public class GameUIManager : MonoBehaviour {
 
 	public void ResetItem()
 	{
+		black.color = new Color (0f, 0f, 0f, 0f);
 		for (int i = 0; i < 4; i++) {
 			itemMesh [i].material = material [4];
 			itemMesh[i].material.name ="Black";

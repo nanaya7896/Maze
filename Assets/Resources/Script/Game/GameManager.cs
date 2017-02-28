@@ -116,6 +116,8 @@ public class GameManager : MonoBehaviour {
 		m_UIManager.ResetItem ();
 		//移動できない状態にする
 		m_PlayerCon.m_isMove = false;
+
+
 	}
 	void InitUpdate()
 	{
@@ -138,7 +140,9 @@ public class GameManager : MonoBehaviour {
 		if (m_UIManager.isGetAllItem ()) {
 			state.SetState (GameState.CLEAR);
 		}
-
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			state.SetState (GameState.STOP);
+		}
 
 		SetMainKeyItem ();
 		SetActiveMap ();
@@ -151,27 +155,31 @@ public class GameManager : MonoBehaviour {
 
 	void StopInit()
 	{
-		
+		m_PlayerCon.m_isMove = false;
+		m_UIManager.SetPoseTexture (0.5f);
 	}
 
 	void StopUpdate()
 	{
 		
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			state.SetState (GameState.PLAY);
+		}
 	}
 
 	void StopEnd()
 	{
-		
+		m_UIManager.SetPoseTexture (0f);
 	}
 
 	void GameOverInit()
 	{
-		
+		FadeManager.Instance.LoadLevel (SceneManage.SceneName.GAMEOVER,2f,false);	
 	}
 
 	void ClearInit()
 	{
-		
+		FadeManager.Instance.LoadLevel (SceneManage.SceneName.RESULT,2f,false);
 	}
 
 	//================================ここまで======================//
