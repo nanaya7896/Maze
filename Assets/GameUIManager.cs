@@ -10,15 +10,7 @@ public class GameUIManager : MonoBehaviour {
 	[SerializeField]
 	List<Material> material =new List<Material>();
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
 
-	}
 
 	public void SetItemMaterial(int stageNum)
 	{

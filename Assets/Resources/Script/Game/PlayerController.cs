@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour {
 	//Playerの状態遷移
 	public enum PlayerState
 	{
-		IDEL,
+		IDLE,
 		WALK,
 		JUMP,
 		WARP
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour {
 	/// <summary>
 	/// プレイヤーのステート
 	/// </summary>
-	public PlayerState ps=PlayerState.IDEL;
+	public PlayerState ps=PlayerState.IDLE;
 
 	Animator anim =null;
 	Animator m_Anim
@@ -137,11 +137,11 @@ public class PlayerController : MonoBehaviour {
 
 	void Awake()
 	{
-		state.Add (PlayerState.IDEL, IdelInit, IdelUpdate, IdelEnd);
+		state.Add (PlayerState.IDLE, IdelInit, IdelUpdate, IdelEnd);
 		state.Add (PlayerState.WALK, WalkInit, WalkUpdate, WalkEnd);
 		state.Add (PlayerState.JUMP, JumpInit, JumpUpdate, JumpEnd);
 		state.Add (PlayerState.WARP,WarpInit,WarpUpdate,WarpEnd);
-		ps = PlayerState.IDEL;
+		ps = PlayerState.IDLE;
 
 		for (int i = 0; i < 4; i++) {
 			targetObj.Add (GameObject.FindWithTag ("Target_"+i));
@@ -258,15 +258,18 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (m_isMove) 
 		{
-			if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D)) {
+			if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D)) 
+			{
 				SetAnimState ("isWalk", true);
 				ps = PlayerState.WALK;
 			}
 
 			Ray ray = new Ray (this.transform.position, transform.forward);
-			if (Physics.Raycast (ray, out hit, 0.3f)) {
+			if (Physics.Raycast (ray, out hit, 0.3f)) 
+			{
 				debugHitTag = hit.collider.tag;
-				if (Input.GetKeyDown (KeyCode.Return)) {
+				if (Input.GetKeyDown (KeyCode.Return)) 
+				{
 					hitTag = hit.collider.tag;
 				}
 			}
@@ -280,7 +283,7 @@ public class PlayerController : MonoBehaviour {
 
 	void WalkInit()
 	{
-		m_bText.SetText (" ");
+		m_bText.SetText ("");
 	}
 
 	RaycastHit hit;
@@ -304,7 +307,7 @@ public class PlayerController : MonoBehaviour {
 			PlayerMove ();
 
 			if (prevPos == transform.position) {
-				ps = PlayerState.IDEL;
+				ps = PlayerState.IDLE;
 			}
 		}
 
@@ -312,7 +315,7 @@ public class PlayerController : MonoBehaviour {
 
 	void WalkEnd()
 	{
-	
+		m_bText.SetText (" ");
 	}
 
 	void JumpInit()
@@ -346,7 +349,7 @@ public class PlayerController : MonoBehaviour {
 		transform.position = Vector3.SmoothDamp (transform.position,WarpPosition ,ref vel,3f);
 
 		if (time < 0f) {
-			ps = PlayerState.IDEL;
+			ps = PlayerState.IDLE;
 			return;
 		}
 		time -= Time.deltaTime;
@@ -360,6 +363,7 @@ public class PlayerController : MonoBehaviour {
 		m_Rigid.useGravity = true;
 		m_EffectManager.AllDeleteParticle ();
 		m_isMove = true;
+		m_bText.SetText (" ");
 	}
 	//ステートここまで
 
@@ -443,7 +447,7 @@ public class PlayerController : MonoBehaviour {
 		switch (gameObjectTag) {
 		case "switch":
 			{
-				m_bText.SetText ("PressReturn");
+				
 				//if (Input.GetKeyDown (KeyCode.Return)) {
 				WallAction.isKeyCheck = true;
 				//}
@@ -480,8 +484,104 @@ public class PlayerController : MonoBehaviour {
 	}
 
 
-	void OnCollisionStay()
+	void OnTriggerStay(Collider col)
 	{
-		
+		switch (col.GetComponent<Collider> ().tag) {
+		case "Wrap_0":
+			{
+				m_bText.SetText ("PressReturn");
+				m_bText.TextAlphaUpdate ();
+
+				break;
+			}
+		case "Wrap_1":
+			{
+				m_bText.SetText ("PressReturn");
+				m_bText.TextAlphaUpdate ();
+
+				break;
+			}
+		case "Wrap_2":
+			{
+				m_bText.SetText ("PressReturn");
+				m_bText.TextAlphaUpdate ();
+				break;
+			}
+		case "Wrap_3":
+			{
+				m_bText.SetText ("PressReturn");
+				m_bText.TextAlphaUpdate ();
+				break;
+			}
+		case "Target_0":
+			{
+				m_bText.SetText ("PressReturn");
+				m_bText.TextAlphaUpdate ();
+				break;
+			}
+		case "Target_1":
+			{
+				m_bText.SetText ("PressReturn");
+				m_bText.TextAlphaUpdate ();
+				break;
+			}
+		case "Target_2":
+			{
+				m_bText.SetText ("PressReturn");
+				m_bText.TextAlphaUpdate ();
+				break;
+			}
+		case "Target_3":
+			{
+				m_bText.SetText ("PressReturn");
+				m_bText.TextAlphaUpdate ();
+				break;
+			}
+		case "Untagged":
+			{
+				m_bText.SetText ("");
+				//m_bText.TextAlphaUpdate ();
+				break;
+			}
+			break;
+		}
+	}
+
+	void OnColliderStay(Collider col)
+	{
+		switch (col.GetComponent<Collider>().tag)
+		{
+		//スイッチに触れたとき
+		case "switch":
+			{
+				m_bText.SetText ("PressReturn");
+				m_bText.TextAlphaUpdate ();
+				break;
+			}
+		case "Item_1":
+			{
+				m_bText.SetText ("PressReturn");
+				m_bText.TextAlphaUpdate ();
+				break;
+			}
+		case "Item_2":
+			{
+				m_bText.SetText ("PressReturn");
+				m_bText.TextAlphaUpdate ();
+				break;
+			}
+		case "Item_3":
+			{
+				m_bText.SetText ("PressReturn");
+				m_bText.TextAlphaUpdate ();
+				break;
+			}
+		case "Untagged":
+			{
+				m_bText.SetText ("");
+				//m_bText.TextAlphaUpdate ();
+				break;
+			}
+		}
 	}
 }
