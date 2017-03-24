@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	//エフェクトをかんりするところ
 	EffectManager effectManager =null;
 	EffectManager m_EffectManager
 	{
@@ -65,6 +66,18 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	//時間を管理するところ
+	TimeChangeScript timeManager=null;
+	TimeChangeScript m_TimeManager
+	{
+		get {
+			if (timeManager == null) {
+				timeManager = GameObject.Find ("/UI/Canvas/Time").GetComponent<TimeChangeScript> ();
+			}
+			return timeManager;
+		}
+	}
+	float limitTime =999f;
 
 	enum GameState
 	{
@@ -99,6 +112,8 @@ public class GameManager : MonoBehaviour {
 			isOnce [i] = false;
 		}
 
+
+
 	}
 	
 	// Update is called once per frame
@@ -125,7 +140,8 @@ public class GameManager : MonoBehaviour {
 	}
 	void InitEnd()
 	{
-		
+		//制限時間を設定する
+		m_TimeManager.SetLimitTime(limitTime);
 	}
 
 	void PlayInit()
@@ -148,6 +164,8 @@ public class GameManager : MonoBehaviour {
 
 		SetMainKeyItem ();
 		SetActiveMap ();
+		//制限時間の更新
+		m_TimeManager.TimeUpdate ();
 	}
 
 	void PlayEnd()
