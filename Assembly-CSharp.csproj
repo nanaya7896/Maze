@@ -46,11 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ButtonText.cs" />
-     <Compile Include="Assets\EffectManager.cs" />
-     <Compile Include="Assets\GameUIManager.cs" />
-     <Compile Include="Assets\MapManager.cs" />
-     <Compile Include="Assets\PictureManager.cs" />
+     <Compile Include="Assets\BlinkText.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\CameraController.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\FaceUpdate.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Character\UnityChan\Scripts\IdleChanger.cs" />
@@ -64,6 +60,7 @@
      <Compile Include="Assets\Resources\ImportAsset\Particle\PowerUp\Scripts\ScaleParticles.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Particle\PowerUp\Scripts\TakeablePowerUp.cs" />
      <Compile Include="Assets\Resources\ImportAsset\Particle\PowerUp\Scripts\Utility\Singleton.cs" />
+     <Compile Include="Assets\Resources\Script\ButtonText.cs" />
      <Compile Include="Assets\Resources\Script\Common\CreateMasterScript.cs" />
      <Compile Include="Assets\Resources\Script\Common\EnumExtensions.cs" />
      <Compile Include="Assets\Resources\Script\Common\EnumFlagsAttribute.cs" />
@@ -72,6 +69,7 @@
      <Compile Include="Assets\Resources\Script\Common\SceneChanger.cs" />
      <Compile Include="Assets\Resources\Script\Common\StateMachine.cs" />
      <Compile Include="Assets\Resources\Script\Common\aspectControll.cs" />
+     <Compile Include="Assets\Resources\Script\EffectManager.cs" />
      <Compile Include="Assets\Resources\Script\Game\DebugMode.cs" />
      <Compile Include="Assets\Resources\Script\Game\EyeCheck.cs" />
      <Compile Include="Assets\Resources\Script\Game\GameManager.cs" />
@@ -79,6 +77,7 @@
      <Compile Include="Assets\Resources\Script\Game\PlayerController.cs" />
      <Compile Include="Assets\Resources\Script\Game\SentenceManager.cs" />
      <Compile Include="Assets\Resources\Script\Game\WallAction.cs" />
+     <Compile Include="Assets\Resources\Script\GameUIManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\AudioManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\ControllerManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\FadeManager.cs" />
@@ -87,6 +86,8 @@
      <Compile Include="Assets\Resources\Script\Manager\ScoreManager.cs" />
      <Compile Include="Assets\Resources\Script\Manager\SingletonMonoBehaviour.cs" />
      <Compile Include="Assets\Resources\Script\Manager\UIManager.cs" />
+     <Compile Include="Assets\Resources\Script\MapManager.cs" />
+     <Compile Include="Assets\Resources\Script\PictureManager.cs" />
      <None Include="Assets\Resources\ImportAsset\Character\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />

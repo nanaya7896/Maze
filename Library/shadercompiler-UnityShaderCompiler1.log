@@ -1164,3 +1164,5 @@ Cmd: disassembleShader
   api=12 insize=3080 outsize=5142 ok=1
 Cmd: disassembleShader
   api=17 insize=5174 outsize=7505 ok=1
+
+Quitting shader compiler process
