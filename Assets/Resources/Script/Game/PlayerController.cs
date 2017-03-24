@@ -305,6 +305,10 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
+		if (transform.position.y < 0f) {
+			transform.position = targetObj [stageNum].transform.position;
+		}
+
 	}
 
 	void WalkEnd()
