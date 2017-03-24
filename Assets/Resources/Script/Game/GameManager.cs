@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour {
 	{
 
 		//アイテムを全て取得していたら
-		if (m_UIManager.isGetAllItem ()) {
+		if (m_UIManager.isGetAllItem () || m_TimeManager.isFinishTime()) {
 			state.SetState (GameState.CLEAR);
 		}
 		if (Input.GetKeyDown (KeyCode.Escape)) {

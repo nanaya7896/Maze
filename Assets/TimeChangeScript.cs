@@ -6,7 +6,7 @@ using System;
 public class TimeChangeScript : MonoBehaviour {
 
 	[SerializeField]
-	private float LimitTime;
+	private float LimitTime=999f;
 	//数字を保存するリスト
 	[SerializeField]
 	List<Sprite> sp = new List<Sprite>();
@@ -25,10 +25,13 @@ public class TimeChangeScript : MonoBehaviour {
 			sp.Add(spr);
 		}
 
+		int num = 10;
 		//子オブジェクトの数だけ数字用GameObjectを取得
-		for (int i = 1; i < transform.childCount * 10; i = i * 10)
+		for (int i = 0; i < transform.childCount;i++)
 		{
-			one.Add(GameObject.Find("/UI/Canvas/Time/" + i));
+			num = (int)Mathf.Pow (10, i);
+			one.Add(GameObject.Find("/UI/Canvas/Time/" + num));
+
 		}
 
 		//psc = GameObject.Find("/GameManager/yuki_taiki").GetComponent<PlayerControllerInState>();
@@ -48,14 +51,12 @@ public class TimeChangeScript : MonoBehaviour {
 	/// <param name="time">Time.</param>
 	void changeTimeSprite(float time)
 	{
-		for (int i = 0; i < GetCurrentLimitTime ().ToString ().Length; i++) {
-			time /= Mathf.Pow (10, i);
-			//現在の時間が10秒以下になったら
-			if (GetCurrentLimitTime () < 10.0f) {
-				one [1].GetComponent<Image> ().sprite = sp [0];
-			}
-			one [i].GetComponent<Image> ().sprite = sp [(int)time % 10];
-			}
+		
+		for (int i = 0; i < transform.childCount;/*GetCurrentLimitTime ().ToString ().Length*/ i++) 
+		{
+			float val =time / Mathf.Pow (10, i);
+			one [i].GetComponent<Image> ().sprite = sp [(int)val % 10];
+		}
 	}
 
 	public void SetLimitTime(float val)
@@ -75,5 +76,10 @@ public class TimeChangeScript : MonoBehaviour {
 	public void Reset()
 	{
 		LimitTime = 999.0f;
+	}
+
+	public bool isFinishTime()
+	{
+		return LimitTime < 0f;
 	}
 }
