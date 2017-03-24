@@ -17,9 +17,8 @@ public class TimeChangeScript : MonoBehaviour {
 
 
 
-	void Start () {
-		//LimitTime = 90.0f;
-
+	void Start () 
+	{
 		foreach(Sprite spr in Resources.LoadAll<Sprite>("Image/Number"))
 		{
 			sp.Add(spr);
@@ -33,9 +32,6 @@ public class TimeChangeScript : MonoBehaviour {
 			one.Add(GameObject.Find("/UI/Canvas/Time/" + num));
 
 		}
-
-		//psc = GameObject.Find("/GameManager/yuki_taiki").GetComponent<PlayerControllerInState>();
-
 	}
 
 	public void TimeUpdate()
@@ -52,7 +48,7 @@ public class TimeChangeScript : MonoBehaviour {
 	void changeTimeSprite(float time)
 	{
 		
-		for (int i = 0; i < transform.childCount;/*GetCurrentLimitTime ().ToString ().Length*/ i++) 
+		for (int i = 0; i < transform.childCount;i++) 
 		{
 			float val =time / Mathf.Pow (10, i);
 			one [i].GetComponent<Image> ().sprite = sp [(int)val % 10];
