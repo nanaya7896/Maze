@@ -179,6 +179,8 @@ public class GameManager : MonoBehaviour {
 				state.SetState (GameState.GAMEOVER);
 			}
 		}
+
+		//敵とぶつかったら
 		if (m_PlayerCon.GetisHit () || m_EnemyManager.diffPosition(m_PlayerCon.transform.position)) {
 			state.SetState (GameState.GAMEOVER);
 		}
@@ -204,7 +206,7 @@ public class GameManager : MonoBehaviour {
 
 	void PlayEnd()
 	{
-		
+		m_EnemyManager.setisRun (false);
 	}
 
 	void StopInit()
