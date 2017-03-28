@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour {
 				state.SetState (GameState.GAMEOVER);
 			}
 		}
-		if (m_PlayerCon.GetisHit ()) {
+		if (m_PlayerCon.GetisHit () || m_EnemyManager.diffPosition(m_PlayerCon.transform.position)) {
 			state.SetState (GameState.GAMEOVER);
 		}
 		//一時停止

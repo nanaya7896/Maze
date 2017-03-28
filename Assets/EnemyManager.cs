@@ -36,4 +36,8 @@ public class EnemyManager : MonoBehaviour {
 		anim.SetBool ("isRun", isRun);
 	}
 
+	public bool diffPosition(Vector3 player)
+	{
+		return Mathf.Abs(Vector3.Distance(player,transform.position))<0.2f;
+	}
 }
