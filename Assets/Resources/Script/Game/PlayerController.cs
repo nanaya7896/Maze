@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour {
 	[Header("ワープ判定に入ったかどうか")]
 	public bool[] isWarp =new bool[4];
 	bool isMove=false;
+
+	bool isHit=false;
 	public bool m_isMove
 	{
 		get
@@ -164,6 +166,10 @@ public class PlayerController : MonoBehaviour {
 
 	void Update () 
 	{
+
+		if (debugHitTag == "Enemy") {
+			isHit = true;
+		}
 		//高さが０以下になったら
 		if (transform.position.y < -100f) {
 			//スタート地点に戻す
@@ -249,6 +255,11 @@ public class PlayerController : MonoBehaviour {
 		state.SetState (_ps);
 	}
 
+	public bool GetisHit()
+	{
+		return isHit;
+	}
+
 	void SetAnimState(string changeParam , bool changeVal)
 	{
 		m_Anim.SetBool (changeParam, changeVal);
@@ -259,6 +270,8 @@ public class PlayerController : MonoBehaviour {
 		SetAnimState ("isWalk", false);
 		SetAnimState ("isRun", false);
 		SetAnimState ("isJump", false);
+
+		isHit = false;
 	}
 
 	void IdelUpdate()
@@ -559,6 +572,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 	}
+		
 
 	void OnColliderStay(Collider col)
 	{

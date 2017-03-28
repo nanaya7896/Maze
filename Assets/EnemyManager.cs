@@ -13,8 +13,11 @@ public class EnemyManager : MonoBehaviour {
 	public Transform target;
 	public float speed = 0.1f;
 
+
+	Animator anim;
 	void Start()
 	{
+		anim = this.GetComponent<Animator> ();
 		target = GameObject.FindWithTag("Player").transform;
 	}
 
@@ -30,6 +33,7 @@ public class EnemyManager : MonoBehaviour {
 	public void setisRun(bool val)
 	{
 		isRun = val;
+		anim.SetBool ("isRun", isRun);
 	}
 
 }

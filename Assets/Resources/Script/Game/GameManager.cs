@@ -179,7 +179,9 @@ public class GameManager : MonoBehaviour {
 				state.SetState (GameState.GAMEOVER);
 			}
 		}
-
+		if (m_PlayerCon.GetisHit ()) {
+			state.SetState (GameState.GAMEOVER);
+		}
 		//一時停止
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			state.SetState (GameState.STOP);
@@ -190,6 +192,7 @@ public class GameManager : MonoBehaviour {
 		if (m_PlayerCon.stageNum == 3) {
 			if (m_PlayerCon.transform.position.z > 10f) {
 				m_EnemyManager.EnemyMove ();
+				m_EnemyManager.setisRun (true);
 			}
 		}
 
