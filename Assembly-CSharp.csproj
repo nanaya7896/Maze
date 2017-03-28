@@ -88,6 +88,7 @@
      <Compile Include="Assets\Resources\Script\Manager\UIManager.cs" />
      <Compile Include="Assets\Resources\Script\MapManager.cs" />
      <Compile Include="Assets\Resources\Script\PictureManager.cs" />
+     <Compile Include="Assets\ResultChange.cs" />
      <Compile Include="Assets\TimeChangeScript.cs" />
      <None Include="Assets\Resources\ImportAsset\Character\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />

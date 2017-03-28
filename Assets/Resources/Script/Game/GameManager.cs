@@ -131,7 +131,8 @@ public class GameManager : MonoBehaviour {
 		m_UIManager.ResetItem ();
 		//移動できない状態にする
 		m_PlayerCon.m_isMove = false;
-
+		//ポーズ画面のテクスチャの表示をオフにする
+		m_UIManager.isSetchangePoseTExtureActive (false);
 
 	}
 	void InitUpdate()
@@ -155,9 +156,16 @@ public class GameManager : MonoBehaviour {
 	{
 
 		//アイテムを全て取得していたら
-		if (m_UIManager.isGetAllItem () || m_TimeManager.isFinishTime()) {
+		if (m_UIManager.isGetAllItem ()) {
 			state.SetState (GameState.CLEAR);
+		} else {
+			//制限時間が０になったら
+			if (m_TimeManager.isFinishTime ()) {
+				state.SetState (GameState.GAMEOVER);
+			}
 		}
+
+		//一時停止
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			state.SetState (GameState.STOP);
 		}
@@ -176,7 +184,7 @@ public class GameManager : MonoBehaviour {
 	void StopInit()
 	{
 		m_PlayerCon.m_isMove = false;
-		m_UIManager.SetPoseTexture (0.5f);
+		m_UIManager.isSetchangePoseTExtureActive (true);
 	}
 
 	void StopUpdate()
@@ -189,7 +197,7 @@ public class GameManager : MonoBehaviour {
 
 	void StopEnd()
 	{
-		m_UIManager.SetPoseTexture (0f);
+		m_UIManager.isSetchangePoseTExtureActive (false);
 	}
 
 	void GameOverInit()

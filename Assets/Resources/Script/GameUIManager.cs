@@ -22,6 +22,8 @@ public class GameUIManager : MonoBehaviour {
 		}
 	}
 
+
+	//アイテムを獲得したときの処理
 	public void SetItemMaterial(int stageNum)
 	{
 		if (itemMesh [stageNum].material.ToString () == material [stageNum].ToString ()) {
@@ -29,9 +31,11 @@ public class GameUIManager : MonoBehaviour {
 		}
 		itemMesh [stageNum].material = material [stageNum];
 	}
-	public void SetPoseTexture(float alpha)
+
+	//ポーズ時のテクスチャーの切り替え
+	public void isSetchangePoseTExtureActive(bool isCheck)
 	{
-		black.color = new Color (0f, 0f, 0f, alpha);
+		black.gameObject.SetActive (isCheck);
 	}
 
 	public bool isGetAllItem()
@@ -52,7 +56,7 @@ public class GameUIManager : MonoBehaviour {
 
 	public void ResetItem()
 	{
-		black.color = new Color (0f, 0f, 0f, 0f);
+	//	black.color = new Color (0f, 0f, 0f, 0f);
 		for (int i = 0; i < 4; i++) {
 			itemMesh [i].material = material [4];
 			itemMesh[i].material.name ="Black";

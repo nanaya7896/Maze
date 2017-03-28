@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField,Header("プレイヤーの移動速度")]
 	float walkSpeed=1f;
 	[SerializeField,Header("プレイヤーの走る速度")]
-	float runSpeed=2f;
+	float runSpeed=4f;
 	[SerializeField,Header("プレイヤーの速度")]
 	Vector3 velocity;
 	[SerializeField,Header("カメラの回転速度")]
@@ -153,7 +153,8 @@ public class PlayerController : MonoBehaviour {
 		m_PlayerLight.range = SaveValueManager.Instance.GetLightDistance ();
 	}
 		
-	void Start () {
+	void Start () 
+	{
 		//MainCameraの取得
 		MainCamera = GameObject.FindWithTag ("MainCamera").transform;
 		CameraUpdate ();
@@ -161,7 +162,14 @@ public class PlayerController : MonoBehaviour {
 		startObj = GameObject.FindWithTag ("StartTarget");
 	}
 
-	void Update () {
+	void Update () 
+	{
+		//高さが０以下になったら
+		if (transform.position.y < -100f) {
+			//スタート地点に戻す
+			transform.position = targetObj [stageNum].transform.position;
+		}
+
 		PlayerRotate ();
 		if (HitAction (hitTag)) {
 			hitTag = string.Empty;
@@ -216,7 +224,7 @@ public class PlayerController : MonoBehaviour {
 	/// </summary>
 	void PlayerRotate()
 	{
-		transform.Rotate (Input.GetAxis("UpAndDown")*cameraRotateSpeed*Time.deltaTime, Input.GetAxis("RightAndLeft")*cameraRotateSpeed *Time.deltaTime, 0f);
+		transform.Rotate (0f, Input.GetAxis("RightAndLeft")*cameraRotateSpeed *Time.deltaTime, 0f);
 	}
 
 	/// <summary>
@@ -305,9 +313,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		if (transform.position.y < 0f) {
-			transform.position = targetObj [stageNum].transform.position;
-		}
+
 
 	}
 
