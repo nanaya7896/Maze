@@ -23,6 +23,21 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// 敵を管理するところ
+	/// </summary>
+	EnemyManager enemyManager =null;
+	EnemyManager m_EnemyManager
+	{
+		get
+		{
+			if (enemyManager == null) {
+				enemyManager = GameObject.FindWithTag ("Enemy").GetComponent<EnemyManager> ();
+			}
+			return enemyManager;
+		}
+	}
+
 	GameUIManager UIManager=null;
 	/// <summary>
 	/// UIを管理しているところ
@@ -168,6 +183,14 @@ public class GameManager : MonoBehaviour {
 		//一時停止
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			state.SetState (GameState.STOP);
+		}
+
+		Debug.Log (m_PlayerCon.stageNum);
+		//Debug.Log (m_PlayerCon.transform.position.z);
+		if (m_PlayerCon.stageNum == 3) {
+			if (m_PlayerCon.transform.position.z > 10f) {
+				m_EnemyManager.EnemyMove ();
+			}
 		}
 
 		SetMainKeyItem ();
